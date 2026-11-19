@@ -1,0 +1,126 @@
+// 1. VARIABLES & ARRAYS: Store project data in a structured array of objects
+const projects = [
+  {
+    skill: "HTML Basics",
+    project: "Game Site",
+    category: "Web Dev",
+    url: "https://codecademy.com"
+  },
+  {
+    skill: "CSS Basics",
+    project: "Portfolio",
+    category: "Web Dev",
+    url: "https://codecademy.com"
+  },
+  {
+    skill: "Grids & Spacing",
+    project: "Time Management App",
+    category: "Web Dev",
+    url: "https://codecademy.com"
+  },
+  {
+    skill: "Responsive Design",
+    project: "Wireframe",
+    category: "Design",
+    url: "#"
+  },
+  {
+    skill: "Documentation & Debugging",
+    project: "Resume",
+    category: "Career",
+    url: "https://sharepoint.com"
+  }
+];
+
+// 2. FUNCTION WITH CONDITIONAL LOGIC & LOOPS: Render projects into the table
+function renderProjects(selectedCategory = "all") {
+  try {
+    const tableBody = document.getElementById("project-table-body");
+    const statusMessage = document.getElementById("status-message");
+
+    // Error handling: Ensure required HTML elements exist before modifying them
+    if (!tableBody) {
+      throw new Error("Could not find #project-table-body in the HTML.");
+    }
+
+    // Clear existing rows before rendering
+    tableBody.innerHTML = "";
+
+    // Conditional logic to filter the array
+    const filteredProjects = [];
+    for (let i = 0; i < projects.length; i++) {
+      const currentProject = projects[i];
+
+      if (selectedCategory === "all" || currentProject.category === selectedCategory) {
+        filteredProjects.push(currentProject);
+      }
+    }
+
+    // Handle the case where no projects match the filter
+    if (filteredProjects.length === 0) {
+      tableBody.innerHTML = `<tr><td colspan="4">No projects found for "${selectedCategory}".</td></tr>`;
+      if (statusMessage) {
+        statusMessage.textContent = "Showing 0 projects.";
+      }
+      return;
+    }
+
+    // Loop through matching projects and build table rows
+    for (let i = 0; i < filteredProjects.length; i++) {
+      const item = filteredProjects[i];
+      const row = document.createElement("tr");
+
+      // Conditional check for valid URLs
+      const linkHTML = item.url && item.url !== "#"
+        ? `<a href="${item.url}" target="_blank" rel="noopener">View</a>`
+        : "<span>In Progress</span>";
+
+      row.innerHTML = `
+        <td>${item.skill}</td>
+        <td>${item.project}</td>
+        <td>${item.category}</td>
+        <td>${linkHTML}</td>
+      `;
+
+      tableBody.appendChild(row);
+    }
+
+    // Update live status count for accessibility and user feedback
+    if (statusMessage) {
+      statusMessage.textContent = `Showing ${filteredProjects.length} project(s).`;
+    }
+
+  } catch (error) {
+    console.error("Error rendering projects:", error.message);
+  }
+}
+
+// 3. INTERACTIVE FEATURE: Set up button click listeners for filtering
+function setupFilterButtons() {
+  const filterButtons = document.querySelectorAll(".filter-btn");
+
+  if (filterButtons.length === 0) {
+    console.warn("No filter buttons found on the page.");
+    return;
+  }
+
+  for (let i = 0; i < filterButtons.length; i++) {
+    filterButtons[i].addEventListener("click", function () {
+      // Remove 'active' class from all buttons
+      for (let j = 0; j < filterButtons.length; j++) {
+        filterButtons[j].classList.remove("active");
+      }
+
+      // Highlight the clicked button and filter the table
+      this.classList.add("active");
+      const category = this.getAttribute("data-category");
+      renderProjects(category);
+    });
+  }
+}
+
+// 4. INITIALIZE: Run script safely once the HTML document finishes loading
+document.addEventListener("DOMContentLoaded", function () {
+  setupFilterButtons();
+  renderProjects("all");
+});

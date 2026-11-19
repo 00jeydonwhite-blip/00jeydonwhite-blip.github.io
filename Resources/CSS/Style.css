@@ -1,226 +1,54 @@
-:root {
-  /* --- COLOR THEORY (60-30-10 Rule) --- */
-  --bg-primary: #0f172a;       /* 60% Dominant: Dark Slate */
-  --text-primary: #f8fafc;     /* Main text contrast */
-  --text-secondary: #94a3b8;   /* Muted text contrast */
-  
-  --bg-surface: #1e293b;       /* 30% Secondary: Card background */
-  --bg-surface-alt: #334155;   /* Secondary accent items */
-  --border-color: #475569;     /* Subtle containment lines */
-  
-  --color-accent: #8b5cf6;     /* 10% Accent: Electric purple vibrant callouts */
-  --color-accent-hover: #a78bfa;
-  
-  /* Tables */
-  --table-header-bg: #334155;
-  --table-zebra-bg: #1e293b;
-
-  /* --- TYPOGRAPHY & LETTERING --- */
-  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  --font-size-base: 1rem;
-  --font-size-sm: 0.875rem;
-  --letter-spacing: 0.03em;
-  
-  --radius-md: 12px;
-  --radius-sm: 6px;
-  --transition-fast: 0.2s ease-in-out;
-  --focus-outline: 3px solid var(--color-accent);
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  padding: 40px;
-  font-family: var(--font-main);
-  font-size: var(--font-size-base);
-  line-height: 1.6;
-}
-
-*:focus-visible {
-  outline: var(--focus-outline);
-  outline-offset: 3px;
-}
-
-/* --- ADVANCED TEXT DESIGN & HEADINGS --- */
-header {
-  font-weight: 700;
-  margin-bottom: 35px;
-}
-
-h1, h2, h3 {
-  color: var(--text-primary);
-}
-
-h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 10px rgba(139, 92, 246, 0.3); /* Premium subtle text glow */
-  margin-bottom: 20px;
-}
-
-h2 {
-  font-size: 1.75rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  border-left: 4px solid var(--color-accent); /* Clean design anchor */
-  padding-left: 12px;
-}
-
-h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-/* --- NAVIGATION WITH ICON ALIGNMENTS --- */
-.secondary-nav {
+/* --- FILTER BUTTONS --- */
+.filter-controls {
   display: flex;
-  gap: 24px;
+  gap: 12px;
   flex-wrap: wrap;
-  list-style: none;
-  margin: 20px 0 35px 0;
+  margin-bottom: 16px;
 }
 
-.nav-link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px; /* Spaces out Font Awesome icons cleanly */
-  color: var(--text-secondary);
-  text-decoration: none;
-  padding: 8px 0;
-  font-weight: 600;
-  letter-spacing: var(--letter-spacing);
-  transition: color var(--transition-fast);
-}
-
-.nav-link i {
-  color: var(--color-accent);
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: var(--color-accent);
-  transform-origin: bottom right;
-  transition: transform var(--transition-fast);
-}
-
-.nav-link:hover, .nav-link:focus-visible {
-  color: var(--text-primary);
-}
-
-.nav-link:hover::after, .nav-link:focus-visible::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-}
-
-/* --- PRIMARY BUTTONS (LINKS/SOCIALS) --- */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px; /* Space for Font Awesome buttons icons */
-  background-color: var(--color-accent);
-  color: #ffffff;
-  border: none;
-  text-decoration: none;
-  padding: 12px 24px;
-  font-weight: 600;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.btn-primary:hover, .btn-primary:focus-visible {
-  background-color: var(--color-accent-hover);
-  transform: translateY(-2px);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-/* --- PORTFOLIO CARDS GRID --- */
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-bottom: 45px;
-}
-
-.portfolio-card {
+.filter-btn {
   background-color: var(--bg-surface);
+  color: var(--text-primary);
   border: 1px solid var(--border-color);
-  padding: 25px;
-  border-radius: var(--radius-md);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
-}
-
-.portfolio-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-accent);
-}
-
-/* List rules inside cards for Skill tags with icons */
-.portfolio-card ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 15px 0;
-}
-
-.portfolio-card ul li {
-  background: var(--bg-surface-alt);
-  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-family: var(--font-main);
   font-size: var(--font-size-sm);
-  border-radius: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
-/* --- PROFESSIONAL HIGH CONTRAST TABLES --- */
-.table-container {
-  width: 100%;
-  overflow-x: auto;
-  margin-bottom: 35px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
+.filter-btn:hover {
+  border-color: var(--color-accent-hover);
 }
 
+.filter-btn.active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  font-weight: 600;
+}
+
+#status-message {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: 12px;
+}
+
+/* --- TABLE STYLING --- */
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--font-size-sm);
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 35px;
 }
 
 caption {
-  caption-side: bottom;
-  padding: 12px;
-  font-weight: 500;
+  text-align: left;
+  font-weight: 600;
   color: var(--text-secondary);
-}
-
-thead {
-  background-color: var(--table-header-bg);
+  margin-bottom: 10px;
 }
 
 th, td {
@@ -229,62 +57,20 @@ th, td {
   border-bottom: 1px solid var(--border-color);
 }
 
-tbody > tr:nth-of-type(even) {
-  background-color: rgba(255, 255, 255, 0.02);
-}
-
-tbody > tr:hover {
-  background-color: rgba(139, 92, 246, 0.05);
-}
-
-td:last-of-type {
-  text-align: left; /* Removed unnatural layout rules */
-}
-
-tfoot {
+thead {
   background-color: var(--table-header-bg);
 }
 
-tfoot th {
-  text-align: right;
-  font-weight: 600;
+tbody tr:nth-child(even) {
+  background-color: var(--table-zebra-bg);
 }
 
-tfoot td {
-  font-weight: 600;
+td a {
   color: var(--color-accent-hover);
+  text-decoration: none;
+  font-weight: 600;
 }
 
-/* --- FOOTER --- */
-footer {
-  text-align: center;
-  padding: 30px 0;
-  margin-top: 60px;
-  border-top: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  font-size: var(--font-size-sm);
-}
-
-/* --- MOBILE RESPONSIVENESS BREAKPOINT --- */
-@media (max-width: 600px) {
-  body {
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  .secondary-nav {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .nav-link {
-    width: 100%;
-  }
-
-  th, td {
-    padding: 10px 12px;
-  }
+td a:hover {
+  text-decoration: underline;
 }
